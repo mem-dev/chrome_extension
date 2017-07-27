@@ -1,0 +1,111 @@
+body {
+    font-family: OpenSans;
+    width: 300px;
+    font-size: 12px;
+    background-color: #364C5F;
+}
+label {
+    color: #ddd;
+    font-weight: 300;
+    font-size: 14px;
+    margin-top: 30px;
+}
+.container {
+    margin: 20px;
+}
+a.close-btn {
+    float: right;
+    color: #ddd;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    border: none;
+    margin-right: -5px;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #fff;
+}
+
+textarea, input {
+    background: #FFFFFF;
+    border: 1px solid #979797;
+    border-radius: 5px;
+    width: 100%;
+    margin-right: 10px;
+    font-size: 12px;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+form {
+    margin-top: 50px;
+}
+
+.form-group {
+    margin-top: 15px;
+}
+
+button {
+    background: #0ee6a8;
+    border: 1px solid #0ee6a8;
+    border-radius: 3px;
+    float: right;
+    margin-right: -5px;
+    color: #081f18;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #9edcca;
+}
+
+button:focus {
+    outline: none;
+}
+
+img {
+    height: 25px;
+}
+
+.learn-more {
+    color: #ddd;
+    margin-top: 12px;
+}
+
+.learn-more:hover {
+    color: #fff;
+}
+
+.container {
+    position: relative;
+}
+.create-snippet-form {
+    position: absolute;
+    top: 0;
+    margin-bottom: 20px;
+}
+
+.create-snippet-form.hide {
+    top: -10000px;
+}
+
+.create-snippet-success {
+    color: #fff;
+    position: absolute;
+    top: -1000px;
+    margin-bottom: 20px;
+}
+
+.create-snippet-success p a {
+    color: #0ee6a8;
+    text-decoration: none;
+    padding-top: 50px;
+}
+
+.create-snippet-success.show {
+    top: 0;
+    padding-top: 50px;
+}
