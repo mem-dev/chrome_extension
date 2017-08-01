@@ -6,8 +6,8 @@ class PasteFromActiveTab {
   }
 
   static pasteClipboardIntoTextBox() {
-    let codeText = document.getElementsByName('code');
-    codeText[0].select();
+    let codeText = document.getElementById('code');
+    codeText.select();
     document.execCommand('paste');
     let createSnippetBtn = document.getElementById('createSnippet');
     createSnippetBtn.focus();

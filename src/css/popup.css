@@ -92,20 +92,20 @@ img {
     top: -10000px;
 }
 
-.create-snippet-success {
+.secondary-message {
     color: #fff;
     position: absolute;
     top: -1000px;
     margin-bottom: 20px;
 }
 
-.create-snippet-success p a {
+.secondary-message p a {
     color: #0ee6a8;
     text-decoration: none;
     padding-top: 50px;
 }
 
-.create-snippet-success.show {
+.secondary-message.show {
     top: 0;
     padding-top: 50px;
 }
