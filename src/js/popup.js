@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }, false);
 
-  loginCheck(showLoginPrompt());
+  loginCheck(showLoginPrompt);
 
   let sitesConfig = [ forStackoverflow ];
 

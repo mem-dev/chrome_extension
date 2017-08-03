@@ -1,1 +1,584 @@
-!function(e){function t(r){if(n[r])return n[r].exports;var o=n[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,t),o.l=!0,o.exports}var n={};t.m=e,t.c=n,t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=8)}([function(e,t,n){"use strict";(function(t){function r(e){return e&&e.__esModule?e:{default:e}}var o=n(1),u=r(o),c=n(4),i=r(c);"production"==t.ENV?e.exports=u.default:e.exports=i.default}).call(t,n(3))},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={host:"https://codecode.ninja",api:"https://codecode.ninja/api/v1"}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(0),o=function(e){return e&&e.__esModule?e:{default:e}}(r),u=function(e,t,n,r){var u=new XMLHttpRequest;u.onreadystatechange=function(){4===u.readyState&&200===u.status?r(u.responseText):404===u.status&&4===u.readyState&&r({error:"An error occured"})},u.open(e.toUpperCase(),o.default.api+t,!0),u.send(n)};t.default=u},function(e,t){function n(){throw new Error("setTimeout has not been defined")}function r(){throw new Error("clearTimeout has not been defined")}function o(e){if(l===setTimeout)return setTimeout(e,0);if((l===n||!l)&&setTimeout)return l=setTimeout,setTimeout(e,0);try{return l(e,0)}catch(t){try{return l.call(null,e,0)}catch(t){return l.call(this,e,0)}}}function u(e){if(f===clearTimeout)return clearTimeout(e);if((f===r||!f)&&clearTimeout)return f=clearTimeout,clearTimeout(e);try{return f(e)}catch(t){try{return f.call(null,e)}catch(t){return f.call(this,e)}}}function c(){m&&p&&(m=!1,p.length?h=p.concat(h):v=-1,h.length&&i())}function i(){if(!m){var e=o(c);m=!0;for(var t=h.length;t;){for(p=h,h=[];++v<t;)p&&p[v].run();v=-1,t=h.length}p=null,m=!1,u(e)}}function a(e,t){this.fun=e,this.array=t}function s(){}var l,f,d=e.exports={};!function(){try{l="function"==typeof setTimeout?setTimeout:n}catch(e){l=n}try{f="function"==typeof clearTimeout?clearTimeout:r}catch(e){f=r}}();var p,h=[],m=!1,v=-1;d.nextTick=function(e){var t=new Array(arguments.length-1);if(arguments.length>1)for(var n=1;n<arguments.length;n++)t[n-1]=arguments[n];h.push(new a(e,t)),1!==h.length||m||o(i)},a.prototype.run=function(){this.fun.apply(null,this.array)},d.title="browser",d.browser=!0,d.env={},d.argv=[],d.version="",d.versions={},d.on=s,d.addListener=s,d.once=s,d.off=s,d.removeListener=s,d.removeAllListeners=s,d.emit=s,d.prependListener=s,d.prependOnceListener=s,d.listeners=function(e){return[]},d.binding=function(e){throw new Error("process.binding is not supported")},d.cwd=function(){return"/"},d.chdir=function(e){throw new Error("process.chdir is not supported")},d.umask=function(){return 0}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={host:"http://localhost:5000",api:"http://localhost:5000/api/v1"}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(0),o=function(e){return e&&e.__esModule?e:{default:e}}(r),u=function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:function(){};chrome.cookies.get({url:o.default.host,name:"DFTT_END_USER_EMAIL"},function(n){n?t():e()})};t.default=u},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r=n(7),o=function(e){return e&&e.__esModule?e:{default:e}}(r);t.default={topicQuerySelector:"#question-header a",reportText:"report_back_stackoverflow",matches:function(e){return o.default.STACKOVERFLOW_URL_REGEX.test(e)}}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={STACKOVERFLOW_URL_REGEX:/^https?:\/\/(?:[^.\/?#]+\.)?stackoverflow\.com/}},function(e,t,n){"use strict";function r(e){return e&&e.__esModule?e:{default:e}}n(9);var o=n(2),u=r(o),c=n(5),i=r(c),a=n(10),s=r(a),l=n(1),f=r(l),d=n(6),p=r(d);document.addEventListener("DOMContentLoaded",function(){document.getElementById("close-btn").addEventListener("click",function(e){window.close()});var e=function(){document.querySelector(".create-snippet-form").className+=" hide",document.querySelector(".secondary-message").className+=" show"},t=function(){e();var t=document.createElement("p");t.onclick=function(e){chrome.tabs.create({url:f.default.host+"/cards"})},t.innerHTML='\n        <h2>Snipped created!</h2>\n        <p><a href="#">Convert your new snippet into an interactive flashcard</a></p>\n    ',document.querySelector(".secondary-message").appendChild(t)};document.getElementById("createSnippet").addEventListener("click",function(e){e.preventDefault(),chrome.tabs.getSelected(null,function(e){var n=document.querySelector("form"),r=new FormData(n);(0,u.default)("POST","/snippets",r,function(e){t()})})},!1),(0,i.default)(function(){e();var t=document.createElement("p");t.onclick=function(e){chrome.tabs.create({url:f.default.host+"/login"})},t.innerHTML='\n        <h2>You are not logged in</h2>\n        <p><a href="#">Click here to log into Code Code Ninja so you can securely use this extension.</a></p>\n    ',document.querySelector(".secondary-message").appendChild(t)}());var n=[p.default];s.default.init(n)},!1)},function(e,t){},function(e,t,n){"use strict";function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}Object.defineProperty(t,"__esModule",{value:!0});var o=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),u=function(){function e(){r(this,e)}return o(e,null,[{key:"init",value:function(e){this.sitesConfig=e,this.pasteClipboardIntoTextBox(),this.pasteFromActiveTab()}},{key:"pasteClipboardIntoTextBox",value:function(){var e=document.getElementById("code");chrome.storage.sync.get(["selectedText"],function(e){console.log("the text",e)}),e.select(),document.execCommand("paste"),document.getElementById("createSnippet").focus()}},{key:"pasteFromActiveTab",value:function(){var e=this;chrome.tabs.getSelected(null,function(t){e.pasteSourceUrl(t.url),e.pasteTopic(t)})}},{key:"pasteTopic",value:function(e){var t=function(e){document.getElementById("topic").value=e};this.sitesConfig.forEach(function(n){n.matches(e.url)&&chrome.tabs.sendMessage(e.id,{text:n.reportText},t)})}},{key:"pasteSourceUrl",value:function(e){document.getElementById("source_url").value=e}}]),e}();t.default=u}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {
+
+var _prod = __webpack_require__(1);
+
+var _prod2 = _interopRequireDefault(_prod);
+
+var _dev = __webpack_require__(4);
+
+var _dev2 = _interopRequireDefault(_dev);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+if (process.ENV == 'production') {
+  module.exports = _prod2.default;
+} else {
+  module.exports = _dev2.default;
+}
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  host: 'https://codecode.ninja',
+  api: 'https://codecode.ninja/api/v1'
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _environment = __webpack_require__(0);
+
+var _environment2 = _interopRequireDefault(_environment);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var apiReq = function apiReq(verb, url, data, callback) {
+  var req = new XMLHttpRequest();
+
+  req.onreadystatechange = function () {
+    if (req.readyState === 4 && req.status === 200) {
+      callback(req.responseText);
+    } else if (req.status === 404 && req.readyState === 4) {
+      callback({ error: "An error occured" });
+    }
+  };
+
+  req.open(verb.toUpperCase(), _environment2.default.api + url, true);
+  req.send(data);
+};
+
+exports.default = apiReq;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  host: 'http://localhost:5000',
+  api: 'http://localhost:5000/api/v1'
+};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _environment = __webpack_require__(0);
+
+var _environment2 = _interopRequireDefault(_environment);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var loginCheck = function loginCheck(onError) {
+  var onSuccess = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
+
+  chrome.cookies.get({ url: _environment2.default.host, name: 'DFTT_END_USER_EMAIL' }, function (cookie) {
+    if (cookie) {
+      onSuccess();
+    } else {
+      onError();
+    }
+  });
+};
+
+exports.default = loginCheck;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _constants = __webpack_require__(7);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
+  topicQuerySelector: '#question-header a',
+  reportText: 'report_back_stackoverflow',
+  matches: function matches(url) {
+    return _constants2.default.STACKOVERFLOW_URL_REGEX.test(url);
+  }
+};
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = {
+  STACKOVERFLOW_URL_REGEX: /^https?:\/\/(?:[^./?#]+\.)?stackoverflow\.com/
+};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(9);
+
+var _apiHandler = __webpack_require__(2);
+
+var _apiHandler2 = _interopRequireDefault(_apiHandler);
+
+var _loginCheck = __webpack_require__(5);
+
+var _loginCheck2 = _interopRequireDefault(_loginCheck);
+
+var _initializeCard = __webpack_require__(10);
+
+var _initializeCard2 = _interopRequireDefault(_initializeCard);
+
+var _prod = __webpack_require__(1);
+
+var _prod2 = _interopRequireDefault(_prod);
+
+var _forStackOverflow = __webpack_require__(6);
+
+var _forStackOverflow2 = _interopRequireDefault(_forStackOverflow);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  var closeBtn = document.getElementById('close-btn');
+
+  closeBtn.addEventListener('click', function (e) {
+    window.close();
+  });
+
+  var showSecondaryMessage = function showSecondaryMessage() {
+    document.querySelector('.create-snippet-form').className += ' hide';
+    document.querySelector('.secondary-message').className += ' show';
+  };
+
+  var showSuccessPage = function showSuccessPage() {
+    showSecondaryMessage();
+
+    var el = document.createElement('p');
+    el.onclick = function (e) {
+      chrome.tabs.create({ url: _prod2.default.host + '/cards' });
+    };
+
+    el.innerHTML = '\n        <h2>Snipped created!</h2>\n        <p><a href="#">Convert your new snippet into an interactive flashcard</a></p>\n    ';
+
+    document.querySelector('.secondary-message').appendChild(el);
+  };
+
+  var showLoginPrompt = function showLoginPrompt() {
+    showSecondaryMessage();
+    var el = document.createElement('p');
+    el.onclick = function (e) {
+      chrome.tabs.create({ url: _prod2.default.host + '/login' });
+    };
+
+    el.innerHTML = '\n        <h2>You are not logged in</h2>\n        <p><a href="#">Click here to log into Code Code Ninja so you can securely use this extension.</a></p>\n    ';
+    document.querySelector('.secondary-message').appendChild(el);
+  };
+
+  var createSnippetBtn = document.getElementById('createSnippet');
+
+  createSnippetBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    chrome.tabs.getSelected(null, function (tab) {
+      var myForm = document.querySelector('form');
+      var formData = new FormData(myForm);
+
+      (0, _apiHandler2.default)('POST', '/snippets', formData, function (res) {
+        showSuccessPage();
+      });
+    });
+  }, false);
+
+  (0, _loginCheck2.default)(showLoginPrompt);
+
+  var sitesConfig = [_forStackOverflow2.default];
+
+  _initializeCard2.default.init(sitesConfig);
+}, false);
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var PasteFromActiveTab = function () {
+  function PasteFromActiveTab() {
+    _classCallCheck(this, PasteFromActiveTab);
+  }
+
+  _createClass(PasteFromActiveTab, null, [{
+    key: 'init',
+    value: function init(sitesConfig) {
+      this.sitesConfig = sitesConfig;
+      this.pasteClipboardIntoTextBox();
+      this.pasteFromActiveTab();
+    }
+  }, {
+    key: 'pasteClipboardIntoTextBox',
+    value: function pasteClipboardIntoTextBox() {
+      var codeText = document.getElementById('code');
+      chrome.storage.sync.get(['selectedText'], function (text) {
+        console.log('the text', text);
+      });
+      codeText.select();
+      document.execCommand('paste');
+      var createSnippetBtn = document.getElementById('createSnippet');
+      createSnippetBtn.focus();
+    }
+  }, {
+    key: 'pasteFromActiveTab',
+    value: function pasteFromActiveTab() {
+      var _this = this;
+
+      chrome.tabs.getSelected(null, function (tab) {
+        _this.pasteSourceUrl(tab.url);
+        _this.pasteTopic(tab);
+      });
+    }
+  }, {
+    key: 'pasteTopic',
+    value: function pasteTopic(tab) {
+      var replaceTopic = function replaceTopic(topic) {
+        document.getElementById('topic').value = topic;
+      };
+
+      this.sitesConfig.forEach(function (siteConfig) {
+        if (siteConfig.matches(tab.url)) {
+          chrome.tabs.sendMessage(tab.id, { text: siteConfig.reportText }, replaceTopic);
+        }
+      });
+    }
+  }, {
+    key: 'pasteSourceUrl',
+    value: function pasteSourceUrl(url) {
+      document.getElementById('source_url').value = url;
+    }
+  }]);
+
+  return PasteFromActiveTab;
+}();
+
+exports.default = PasteFromActiveTab;
+
+/***/ })
+/******/ ]);

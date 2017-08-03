@@ -21,6 +21,7 @@
     "cookies",
     "http://localhost/",
     "storage",
+    "notifications",
     "<all_urls>"
   ],
   "icons": {
@@ -31,6 +32,9 @@
       "matches": ["http://*/*", "https://*/*"],
       "js": ["script.bundle.js"]
     }
+  ],
+  "web_accessible_resources": [
+    "img/icon.png"
   ],
   "content_security_policy": "script-src 'self' http://localhost:5000/; object-src 'self'"
 }

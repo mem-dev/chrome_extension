@@ -2,6 +2,22 @@ import config from './config/environment';
 import apiHandler from './utils/apiHandler';
 import loginCheck from './utils/loginCheck';
 
+
+const getNotificationId = () => {
+  let id = Math.floor(Math.random() * 9007199254740992) + 1;
+  return id.toString();
+}
+
+let showNotification = (selectionText) => {
+  chrome.notifications.create(getNotificationId(), {
+    type: 'basic',
+    title: 'Success!',
+    iconUrl: 'img/icon.png',
+    message: `'${selectionText}' posted successfully to CodeCode Ninja`}, () => {
+      console.log('The error ', chrome.runtime.lastError)
+  });
+}
+
 let contextMenuItem = {
   id: "ccn",
   title: "Post to CodeCode Ninja",
@@ -18,8 +34,11 @@ chrome.contextMenus.onClicked.addListener((event) => {
       formData.append('snippet[back_content]', event.selectionText);
       formData.append('snippet[source]', event.pageUrl);
 
+      // to test the notification
+      showNotification(event.selectionText);
+
       apiHandler('POST', '/snippets', formData, function(res) {
-        alert(`'${event.selectionText}' posted successfully to CodeCode Ninja`);
+        chrome.notifications.create('1', {message: `'${event.selectionText}' posted successfully to CodeCode Ninja`});
       })
     }
   }
@@ -30,14 +49,6 @@ chrome.contextMenus.onClicked.addListener((event) => {
 
   loginCheck(onError, onSuccess);
 
-  // chrome.cookies.get({ url: config.host, name: 'DFTT_END_USER_EMAIL' },
-  //   function (cookie) {
-  //     if (cookie) {
-  //     }
-  //     else {
-  //     }
-  //   }
-  // );
 })
 
 
