@@ -335,7 +335,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
   host: 'http://localhost:5000',
-  api: 'http://localhost:5000/api/v1'
+  api: 'http://localhost:500/api/v1'
 };
 
 /***/ }),
