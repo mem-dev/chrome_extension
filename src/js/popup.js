@@ -1,5 +1,6 @@
 import '../css/popup.css';
 import apiHandler from './utils/apiHandler';
+import loginCheck from './utils/loginCheck';
 import InitializeCard from './helpers/initializeCard';
 import config from './config/environment/prod';
 
@@ -57,23 +58,13 @@ document.addEventListener('DOMContentLoaded', function() {
       let formData = new FormData(myForm);
 
       apiHandler('POST', '/snippets', formData, function(res) {
-        console.log(res);
         showSuccessPage();
       })
 
     });
   }, false);
 
-
-  chrome.cookies.get({ url: config.host, name: 'DFTT_END_USER_EMAIL' },
-    function (cookie) {
-      if (cookie) {
-        console.log(cookie.value);
-      }
-      else {
-        showLoginPrompt();
-      }
-    });
+  loginCheck(showLoginPrompt());
 
   let sitesConfig = [ forStackoverflow ];
 

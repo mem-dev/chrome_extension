@@ -7,7 +7,3 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
 });
 
-chrome.browserAction.onClicked.addListener((activeTab) => {
-  let newURL = "http://codecode.ninja";
-  chrome.tabs.create({ url: newURL });
-});

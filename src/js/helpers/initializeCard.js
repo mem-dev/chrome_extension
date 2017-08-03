@@ -7,6 +7,9 @@ class PasteFromActiveTab {
 
   static pasteClipboardIntoTextBox() {
     let codeText = document.getElementById('code');
+    chrome.storage.sync.get(['selectedText'], (text) => {
+      console.log('the text', text);
+    })
     codeText.select();
     document.execCommand('paste');
     let createSnippetBtn = document.getElementById('createSnippet');
