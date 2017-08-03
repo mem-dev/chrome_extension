@@ -24,11 +24,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let el = document.createElement('p');
     el.onclick = (e) => {
-      chrome.tabs.create({ url: `${config.host}/cards` });
+      chrome.tabs.create({ url: `${config.host}/snippets/process` });
     };
 
     el.innerHTML = `
-        <h2>Snipped created!</h2>
+        <h2>Snippet created!</h2>
         <p><a href="#">Convert your new snippet into an interactive flashcard</a></p>
     `;
 
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     el.innerHTML = `
         <h2>You are not logged in</h2>
-        <p><a href="#">Click here to log into Code Code Ninja so you can securely use this extension.</a></p>
+        <p><a href="#">Click here to log into CodeCode Ninja so you can securely use this extension.</a></p>
     `;
     document.querySelector('.secondary-message').appendChild(el);
   };
