@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
 
-  "name": "CCN Extension",
-  "description": "This extension sends clipboard text to CCN",
+  "name": "CodeCode Ninja Snippet Saver",
+  "description": "Allows you to save snippets of code into CodeCode Ninja, to turn into flashcards.",
   "version": "1.0",
 
   "browser_action": {
-   "default_icon": "img/icon.png",
+   "default_icon": "img/icon16.png",
    "default_popup": "popup.html",
     "default_title": "CCN Create Cards"
   },
@@ -21,20 +21,18 @@
     "cookies",
     "http://localhost/",
     "storage",
-    "notifications",
     "<all_urls>"
   ],
   "icons": {
-    "16": "img/icon.png"
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
   },
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
       "js": ["script.bundle.js"]
     }
-  ],
-  "web_accessible_resources": [
-    "img/icon.png"
   ],
   "content_security_policy": "script-src 'self' http://localhost:5000/; object-src 'self'"
 }
