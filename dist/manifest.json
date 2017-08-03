@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "CCN Extension",
-  "description": "This extension will send clipboard text to CCN",
+  "description": "This extension sends clipboard text to CCN",
   "version": "1.0",
 
   "browser_action": {
@@ -10,13 +10,22 @@
    "default_popup": "popup.html",
     "default_title": "CCN Create Cards"
   },
+  "background": {
+    "scripts": ["background.bundle.js"],
+    "persistent": false
+  },
   "permissions": [
     "activeTab",
     "clipboardRead",
+    "contextMenus",
     "cookies",
     "http://localhost/",
+    "storage",
     "<all_urls>"
   ],
+  "icons": {
+    "16": "img/icon.png"
+  },
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],

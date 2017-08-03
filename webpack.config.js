@@ -8,7 +8,8 @@ module.exports = {
   // Entry files for our popup and background pages
   entry: {
     popup: './src/js/popup.js',
-    script: './src/js/script.js'
+    script: './src/js/script.js',
+    background: './src/js/background.js'
   },
   // Extension will be built into ./dist folder, which we can then load as unpacked extension in Chrome
   output: {
