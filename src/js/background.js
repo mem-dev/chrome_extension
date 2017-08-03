@@ -38,7 +38,11 @@ chrome.contextMenus.onClicked.addListener((event) => {
       showNotification(event.selectionText);
 
       apiHandler('POST', '/snippets', formData, function(res) {
-        chrome.notifications.create('1', {message: `'${event.selectionText}' posted successfully to CodeCode Ninja`});
+        if (res.status === 200) {
+          chrome.notifications.create('1', {message: `'${event.selectionText}' posted successfully to CodeCode Ninja`});
+        } else {
+          chrome.notifications.create('1', {message: `An error prevented'${event.selectionText}' from posting successfully to CodeCode Ninja`});
+        }
       })
     }
   }
