@@ -2,7 +2,7 @@ import '../css/popup.css';
 import apiHandler from './utils/apiHandler';
 import loginCheck from './utils/loginCheck';
 import InitializeCard from './helpers/initializeCard';
-import config from './config/environment/prod';
+import config from './config/environment';
 
 import forStackoverflow  from './site_specific_scripts/forStackOverflow';
 
@@ -49,16 +49,25 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('.secondary-message').appendChild(el);
   };
 
+  let toggleError = (show = '') => {
+    document.querySelector('.error').className = `error ${show}`;
+  }
+
   let createSnippetBtn = document.getElementById('createSnippet');
 
   createSnippetBtn.addEventListener('click', function(e) {
+    toggleError();
     e.preventDefault();
     chrome.tabs.getSelected(null, function(tab) {
       let myForm = document.querySelector('form');
       let formData = new FormData(myForm);
 
       apiHandler('POST', '/snippets', formData, function(res) {
-        showSuccessPage();
+        if (res.status === 200) {
+          showSuccessPage();
+        } else {
+          toggleError('show');
+        }
       })
 
     });

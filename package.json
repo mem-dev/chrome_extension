@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack -p",
+    "build": "NODE_ENV=production webpack -p",
     "watch": "webpack --watch",
     "test": "flow && jest",
     "flow": "flow"
