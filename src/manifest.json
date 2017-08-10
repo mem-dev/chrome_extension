@@ -3,7 +3,7 @@
 
   "name": "CodeCode Ninja Snippet Saver",
   "description": "Allows you to save snippets of code into CodeCode Ninja, to turn into flashcards.",
-  "version": "1.0.1",
+  "version": "1.0.2",
 
   "browser_action": {
    "default_icon": "img/icon16.png",
