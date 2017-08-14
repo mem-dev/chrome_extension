@@ -65,6 +65,8 @@ document.addEventListener('DOMContentLoaded', function() {
       apiHandler('POST', '/snippets', formData, function(res) {
         if (res.status === 200) {
           showSuccessPage();
+        } else if (res.status === 403) {
+          showLoginPrompt();
         } else {
           toggleError('show');
         }
